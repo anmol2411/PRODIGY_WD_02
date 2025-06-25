@@ -54,44 +54,44 @@ const Stopwatch: React.FC = () => {
 
     return (
         <div className='flex w-full h-svh justify-center items-center'>
-        <Card className="max-w-md w-full mx-6 p-4 shadow-lg">
-            <CardContent className="flex flex-col items-center space-y-4">
-                <div className="text-3xl font-mono">{formatTime(time)}</div>
-                <div className="flex space-x-2">
-                    {running ? (
-                        <Button variant="destructive" onClick={pause}>
-                            Pause
+            <Card className="max-w-md w-full mx-6 p-8 shadow-lg">
+                <CardContent className="flex flex-col items-center space-y-8">
+                    <div className="text-3xl font-mono">{formatTime(time)}</div>
+                    <div className="flex space-x-2">
+                        {running ? (
+                            <Button variant="destructive" onClick={pause}>
+                                Pause
+                            </Button>
+                        ) : (
+                            <Button onClick={start}>Start</Button>
+                        )}
+                        <Button variant="secondary" onClick={reset}>
+                            Reset
                         </Button>
-                    ) : (
-                        <Button onClick={start}>Start</Button>
-                    )}
-                    <Button variant="secondary" onClick={reset}>
-                        Reset
-                    </Button>
-                    <Button variant="outline" onClick={lap} disabled={!running}>
-                        Lap
-                    </Button>
-                </div>
-                <ScrollArea className='overflow-y-auto w-full max-h-[70svh]'>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Lap</TableHead>
-                                <TableHead>Time</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {laps.map((lapTime, index) => (
-                                <TableRow key={index}>
-                                    <TableCell>{laps.length - index}</TableCell>
-                                    <TableCell>{formatTime(lapTime)}</TableCell>
+                        <Button variant="outline" onClick={lap} disabled={!running}>
+                            Lap
+                        </Button>
+                    </div>
+                    <div className='relative overflow-y-auto max-h-[60svh] w-full'>
+                        <Table>
+                            <TableHeader className='shadow-[inset_0_-1px_0_0_rgba(255,255,255,0.1)]'>
+                                <TableRow>
+                                    <TableHead>Lap</TableHead>
+                                    <TableHead>Time</TableHead>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </ScrollArea>
-            </CardContent>
-        </Card>
+                            </TableHeader>
+                            <TableBody>
+                                {laps.map((lapTime, index) => (
+                                    <TableRow key={index}>
+                                        <TableCell>{laps.length - index}</TableCell>
+                                        <TableCell>{formatTime(lapTime)}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                </CardContent>
+            </Card>
         </div>
     );
 };
